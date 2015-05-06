@@ -1,17 +1,14 @@
+
+var postcss = require('gulp-postcss');
 var gulp = require('gulp');
-var autoprefixer = require('gulp-autoprefixer');
+var cssgrace = require('cssgrace');
 
 
-
-gulp.task('autoprefixer', function () {
-    return gulp.src('./styles/style.css')
-        .pipe(autoprefixer({
-            browsers: ['last 5 versions'],
-            cascade: false
-        }))
+gulp.task('default', function () {
+    var processors = [
+        require('cssgrace')
+    ];
+    gulp.src('./styles/style.css')
+        .pipe(postcss(processors))
         .pipe(gulp.dest('./styles'))
-});
-
-gulp.task('default', function() {  
-    gulp.start('autoprefixer');
 });
